@@ -1,0 +1,35 @@
+# Copy this file to config/backend/config.yaml before running docker compose.
+# The backend container sees this directory as /workspace/config.
+
+rate_limit:
+  mode: disabled
+
+generation_queue:
+  max_pending_jobs: 25
+  max_running_jobs: 5
+  default_provider_concurrency: 2
+  provider_concurrency:
+    openai: 2
+
+request_capture:
+  enabled: false
+  directory: data/request-captures
+  retention_days: 7
+
+beta_access:
+  enabled: false
+  passphrase_env: BETA_ACCESS_PASSPHRASE
+  token_secret_env: BETA_ACCESS_TOKEN_SECRET
+  token_ttl_seconds: -1
+  cookie_name: beta_access_token
+
+providers:
+  - name: openai
+    env_key: OPENAI_API_KEY
+    base_url: https://api.openai.com
+    protocol: openai
+    models:
+      - id: gpt-5.4-mini
+        name: GPT-5.4 Mini
+        temperature: 1.0
+        timeout: 180
