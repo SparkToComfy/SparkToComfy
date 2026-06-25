@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.7
+
 FROM node:24-alpine AS frontend-build
 
 ARG FRONTEND_REPO=https://github.com/SparkToComfy/SparkToComfy-frontend.git
@@ -5,7 +7,12 @@ ARG FRONTEND_REF=main
 ARG VITE_API_BASE=
 
 RUN apk add --no-cache git
-RUN git clone --depth 1 --branch "$FRONTEND_REF" "$FRONTEND_REPO" /frontend \
+RUN --mount=type=secret,id=github_token,required=false \
+    token="$(cat /run/secrets/github_token 2>/dev/null || true)" \
+    && if [ -n "$token" ]; then \
+        git config --global url."https://x-access-token:${token}@github.com/".insteadOf "https://github.com/"; \
+    fi \
+    && git clone --depth 1 --branch "$FRONTEND_REF" "$FRONTEND_REPO" /frontend \
     || (git clone "$FRONTEND_REPO" /frontend && cd /frontend && git checkout "$FRONTEND_REF")
 
 WORKDIR /frontend
@@ -18,7 +25,12 @@ ARG BACKEND_REPO=https://github.com/SparkToComfy/SparkToComfy-backend.git
 ARG BACKEND_REF=main
 
 RUN apk add --no-cache git
-RUN git clone --depth 1 --branch "$BACKEND_REF" "$BACKEND_REPO" /backend \
+RUN --mount=type=secret,id=github_token,required=false \
+    token="$(cat /run/secrets/github_token 2>/dev/null || true)" \
+    && if [ -n "$token" ]; then \
+        git config --global url."https://x-access-token:${token}@github.com/".insteadOf "https://github.com/"; \
+    fi \
+    && git clone --depth 1 --branch "$BACKEND_REF" "$BACKEND_REPO" /backend \
     || (git clone "$BACKEND_REPO" /backend && cd /backend && git checkout "$BACKEND_REF")
 
 

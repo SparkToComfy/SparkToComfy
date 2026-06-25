@@ -57,6 +57,14 @@ Fill `.env` provider keys before generating prompts.
 
 App images are built by `.github/workflows/build-app-image.yml`.
 
+If `SparkToComfy-backend` or `SparkToComfy-frontend` are private repositories,
+create a fine-grained GitHub token with read access to both repos and save it in
+this repo as an Actions secret:
+
+```text
+SPARKTOCOMFY_SOURCE_TOKEN
+```
+
 Manual workflow inputs:
 
 ```text

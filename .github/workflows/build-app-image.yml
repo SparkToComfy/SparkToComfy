@@ -79,3 +79,5 @@ jobs:
             FRONTEND_REPO=${{ env.FRONTEND_REPO }}
             FRONTEND_REF=${{ steps.refs.outputs.frontend_ref }}
             VITE_API_BASE=
+          secrets: |
+            github_token=${{ secrets.SPARKTOCOMFY_SOURCE_TOKEN }}
