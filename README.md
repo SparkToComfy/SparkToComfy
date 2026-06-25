@@ -1,6 +1,6 @@
-# SparkToComfy Docker
+# SparkToComfy Compose
 
-This repo owns local Docker orchestration and runtime config layout for the
+This repo owns Docker Compose app wiring and runtime config layout for the
 split SparkToComfy repos.
 
 Expected sibling repos:
@@ -9,7 +9,7 @@ Expected sibling repos:
 SparkToComfy/
   SparkToComfy-backend/
   SparkToComfy-frontend/
-  SparkToComfy-docker/
+  SparkToComfy-compose/
 ```
 
 ## Config Layout
@@ -53,5 +53,5 @@ Fill `.env` provider keys before generating prompts.
 
 - `SparkToComfy-backend` owns API code, Python dependencies, and backend tests.
 - `SparkToComfy-frontend` owns Vue/Vite code, frontend checks, and browser build output.
-- `SparkToComfy-docker` owns compose files, mounted runtime config layout, and deployment notes.
+- `SparkToComfy-compose` owns compose files and mounted runtime config layout.
 - `SparkToComfy-bot` is intentionally not created yet.
