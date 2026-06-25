@@ -64,6 +64,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Validate private source token
+        shell: bash
+        run: |
+          if [ -z "${{ secrets.SPARKTOCOMFY_SOURCE_TOKEN }}" ]; then
+            echo "::error title=Missing source token::SparkToComfy-backend and SparkToComfy-frontend are private. Add a fine-grained token with read access to both repos as SPARKTOCOMFY_SOURCE_TOKEN in this repo's Actions secrets, or make the source repos public."
+            exit 1
+          fi
+
       - name: Build and push app image
         uses: docker/build-push-action@v6
         with:
