@@ -1,0 +1,81 @@
+name: Build app image
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_version:
+        description: "Image tag to publish"
+        required: true
+        default: "latest"
+      backend_ref:
+        description: "SparkToComfy-backend branch, tag, or commit"
+        required: true
+        default: "main"
+      frontend_ref:
+        description: "SparkToComfy-frontend branch, tag, or commit"
+        required: true
+        default: "main"
+  push:
+    branches:
+      - main
+    paths:
+      - "Dockerfile.app"
+      - ".github/workflows/build-app-image.yml"
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_NAME: ghcr.io/sparktocomfy/app
+  BACKEND_REPO: https://github.com/SparkToComfy/SparkToComfy-backend.git
+  FRONTEND_REPO: https://github.com/SparkToComfy/SparkToComfy-frontend.git
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve refs
+        id: refs
+        shell: bash
+        run: |
+          app_version="${{ github.event.inputs.app_version }}"
+          backend_ref="${{ github.event.inputs.backend_ref }}"
+          frontend_ref="${{ github.event.inputs.frontend_ref }}"
+
+          if [ -z "$app_version" ]; then app_version="latest"; fi
+          if [ -z "$backend_ref" ]; then backend_ref="main"; fi
+          if [ -z "$frontend_ref" ]; then frontend_ref="main"; fi
+
+          echo "app_version=$app_version" >> "$GITHUB_OUTPUT"
+          echo "backend_ref=$backend_ref" >> "$GITHUB_OUTPUT"
+          echo "frontend_ref=$frontend_ref" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push app image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.app
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ steps.refs.outputs.app_version }}
+          build-args: |
+            APP_VERSION=${{ steps.refs.outputs.app_version }}
+            BACKEND_REPO=${{ env.BACKEND_REPO }}
+            BACKEND_REF=${{ steps.refs.outputs.backend_ref }}
+            FRONTEND_REPO=${{ env.FRONTEND_REPO }}
+            FRONTEND_REF=${{ steps.refs.outputs.frontend_ref }}
+            VITE_API_BASE=

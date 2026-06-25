@@ -1,24 +1,13 @@
 services:
-  backend:
-    build:
-      context: ../SparkToComfy-backend
+  app:
+    image: ${APP_IMAGE:-ghcr.io/sparktocomfy/app:latest}
     env_file:
       - ./.env
     environment:
-      APP_ENV: development
-      LOG_LEVEL: INFO
+      APP_ENV: ${APP_ENV:-production}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
     volumes:
       - ./config/backend:/workspace/config:ro
     ports:
-      - "8000:8000"
-
-  frontend:
-    build:
-      context: ../SparkToComfy-frontend
-      dockerfile: Dockerfile.dev
-    environment:
-      VITE_API_PROXY_TARGET: http://backend:8000
-    ports:
-      - "5173:5173"
-    depends_on:
-      - backend
+      - "${APP_PORT:-8000}:8000"
+    restart: unless-stopped

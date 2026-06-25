@@ -1,0 +1,11 @@
+# Format Spec — output_format = "tags"
+# 將格式規範放在 format_tags.md 中（此檔案不會被 commit）
+# 後端 PromptAssembler 會將 system.md（人設規則）+ 此檔案拼接為完整 system prompt
+# 區塊結構骨架（code block 內：僅 tags 行，無英文描述）：
+# 注意：真實檔案的【格式自檢】含「禁止複誦」（anti-echo）規則 — 從本範本重建時務必保留該防線（08-04 UAT gap #1）
+
+##### 描述: [繁中描述 placeholder]
+---
+```
+<danbooru tags, 逗號分隔>,
+```

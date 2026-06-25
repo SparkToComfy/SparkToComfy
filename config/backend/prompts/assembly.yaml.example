@@ -1,0 +1,9 @@
+user_message:
+  slots:
+    - user_requirements
+    - identity
+    - costume
+    - composition
+    - composition_guidance
+    - count
+    - final_instructions

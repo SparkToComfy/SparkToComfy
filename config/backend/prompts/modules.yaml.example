@@ -1,0 +1,51 @@
+modules:
+  fashion_clothing:
+    field: fashion_clothing
+    snippet: modules/fashion_clothing.md
+    slot: user_requirements
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 10
+  character_detailing:
+    field: character_detailing
+    snippet: modules/character_detailing.md
+    slot: user_requirements
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 20
+  visual_emphasis_character_and_outfit:
+    field: visual_emphasis
+    value: character_and_outfit
+    snippet: modules/visual_emphasis_character_and_outfit.md
+    slot: composition_guidance
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 10
+  visual_emphasis_background_environment:
+    field: visual_emphasis
+    value: background_environment
+    snippet: modules/visual_emphasis_background_environment.md
+    slot: composition_guidance
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 10
+  image_narrative:
+    field: image_narrative
+    snippet: modules/image_narrative.md
+    slot: composition_guidance
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 20
+  color_play:
+    field: color_play
+    snippet: modules/color_play.md
+    slot: composition_guidance
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 30
+  scene_logic:
+    field: scene_logic
+    snippet: modules/scene_logic.md
+    slot: composition_guidance
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 40
+  per_prompt_self_check:
+    field: per_prompt_self_check
+    snippet: modules/per_prompt_self_check.md
+    slot: final_instructions
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 10

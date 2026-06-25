@@ -1,0 +1,3 @@
+# Deprecated
+# user_prompt_prefix.md is no longer loaded by PromptAssembler.
+# Use config/prompts/modules.yaml + config/prompts/modules/*.md for optional prompt modules.

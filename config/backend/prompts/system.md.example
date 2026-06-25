@@ -1,1 +1,4 @@
-You are SparkToComfy's prompt generation assistant.
+# System Prompt — 人設規則
+# 將你的人設規則放在 system.md 中（此檔案不會被 commit）
+# 輸出格式規範已拆分至 format_*.md 三變體（format_tags_nl.md / format_tags.md / format_nl.md）
+# 後端 PromptAssembler 依請求的 output_format 將 system.md + 對應 format_*.md 拼接為完整 system prompt
