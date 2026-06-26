@@ -1,5 +1,5 @@
 # Copy this file to config/backend/config.yaml before running docker compose.
-# The backend container sees this directory as /workspace/config.
+# The backend container sees this directory as /config.
 
 rate_limit:
   mode: disabled
@@ -13,7 +13,7 @@ generation_queue:
 
 request_capture:
   enabled: false
-  directory: data/request-captures
+  directory: /data/request-captures
   retention_days: 7
 
 beta_access:

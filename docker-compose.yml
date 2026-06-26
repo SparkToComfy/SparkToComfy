@@ -6,8 +6,11 @@ services:
     environment:
       APP_ENV: ${APP_ENV:-production}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      CONFIG_DIR: /config
+      DATA_DIR: /data
     volumes:
-      - ./config/backend:/workspace/config:ro
+      - ./config/backend:/config:ro
+      - ./data:/data
     ports:
       - "${APP_PORT:-8000}:8000"
     restart: unless-stopped

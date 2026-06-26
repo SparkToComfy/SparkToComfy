@@ -10,6 +10,10 @@ config/backend/prompts/*.yaml
 config/backend/prompts/modules/*.md
 config/bot/*.yaml
 
+# Runtime data
+data/*
+!data/.gitkeep
+
 # Keep examples
 !config/backend/config.yaml.example
 !config/backend/prompts/*.md.example

@@ -43,6 +43,8 @@ ARG APP_VERSION=dev
 WORKDIR /workspace
 
 ENV PYTHONUNBUFFERED=1
+ENV CONFIG_DIR=/config
+ENV DATA_DIR=/data
 ENV STATIC_DIR=/workspace/frontend-dist
 
 RUN pip install --no-cache-dir poetry \
@@ -52,7 +54,8 @@ COPY --from=backend-source /backend/pyproject.toml /backend/poetry.lock ./
 RUN poetry install --only main --no-root --no-interaction --no-ansi
 
 COPY --from=backend-source /backend/src ./src
-COPY --from=backend-source /backend/config ./config
+COPY --from=backend-source /backend/config /config
+RUN mkdir -p /data
 
 COPY --from=frontend-build /frontend/dist /workspace/frontend-dist
 

@@ -33,11 +33,13 @@ config/
 The compose file mounts:
 
 ```yaml
-./config/backend:/workspace/config:ro
+./config/backend:/config:ro
+./data:/data
 ```
 
-Inside the app container, `/workspace/config/config.yaml` is the backend config
-file and `/workspace/config/prompts/` contains prompt templates.
+Inside the app container, `/config/config.yaml` is the backend config file and
+`/config/prompts/` contains prompt templates. Runtime-only data, including
+request capture Markdown files, belongs under `/data`.
 
 ## First Run
 
@@ -47,11 +49,25 @@ cp config/backend/config.yaml.example config/backend/config.yaml
 find config/backend/prompts -name '*.example' -type f | while read -r file; do
   cp "$file" "${file%.example}"
 done
+mkdir -p data
 docker compose pull
 docker compose up -d
 ```
 
 Fill `.env` provider keys before generating prompts.
+
+## Runtime Paths
+
+The compose runtime intentionally matches the combined app image layout:
+
+```text
+CONFIG_DIR=/config
+DATA_DIR=/data
+STATIC_DIR=/workspace/frontend-dist
+```
+
+Keep real `.env`, `config/backend/config.yaml`, prompt templates, and `data/`
+local to the deployment host. The repository tracks only examples.
 
 ## Building App Images
 
