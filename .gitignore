@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.example
+.local-backup/
 
 # Runtime config with secrets/private prompts
 config/backend/config.yaml
