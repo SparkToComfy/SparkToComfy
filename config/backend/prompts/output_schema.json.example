@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "description": "Array length must match the requested generation count; if no count is requested, output one result. For multi-result cost-priority requests, each item must be an independent lean-but-complete prompt-quality variant, not a shortened summary.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "description": "One complete prompt result describing a single renderable image variant.",
+        "properties": {
+          "plan": {
+            "type": "string",
+            "description": "Optional compact composition summary. If present, English female subject nouns must use girl/girls, never woman/women/lady/ladies."
+          },
+          "description": {
+            "type": "string",
+            "description": "Traditional Chinese visual description of the same image."
+          },
+          "tags": {
+            "type": "string",
+            "description": "Danbooru tags as a comma-separated string. Female subject tags must use girl/girls forms, never woman/women/lady/ladies."
+          },
+          "en": {
+            "type": "string",
+            "description": "English natural-language visual prompt for the same image. Female subject nouns must use girl/girls, never woman/women/lady/ladies."
+          }
+        },
+        "required": [
+          "description",
+          "tags",
+          "en"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "additionalProperties": false
+}

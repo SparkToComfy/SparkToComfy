@@ -1,10 +1,34 @@
 modules:
+  multi_character:
+    field: multi_character
+    snippet: modules/multi_character.md
+    slot: user_requirements
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 5
   fashion_clothing:
     field: fashion_clothing
     snippet: modules/fashion_clothing.md
     slot: user_requirements
     applies_to: ["tags", "tags+nl", "nl"]
     order: 10
+  cultural_costume:
+    field: cultural_costume
+    snippet: modules/cultural_costume.md
+    slot: user_requirements
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 12
+  character_creativity:
+    field: character_creativity
+    snippet: modules/character_creativity.md
+    slot: user_requirements
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 15
+  nsfw_techniques:
+    field: nsfw_techniques
+    snippet: modules/nsfw_techniques.md
+    slot: user_requirements
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 18
   character_detailing:
     field: character_detailing
     snippet: modules/character_detailing.md
@@ -31,6 +55,12 @@ modules:
     slot: composition_guidance
     applies_to: ["tags", "tags+nl", "nl"]
     order: 20
+  lighting_mood:
+    field: lighting_mood
+    snippet: modules/lighting_mood.md
+    slot: composition_guidance
+    applies_to: ["tags", "tags+nl", "nl"]
+    order: 25
   color_play:
     field: color_play
     snippet: modules/color_play.md

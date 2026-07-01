@@ -1,4 +1,0 @@
-# 英文描述句數限制模板。
-# 必須保留 {{min_sentences}} 與 {{max_sentences}} placeholder，後端會依 prompt_options 動態替換。
-
-英文描述控制在 {{min_sentences}}-{{max_sentences}} 句內，只描述可驗證的畫面元素（人物外觀、服裝、姿勢、場景、光影），不添加內心獨白或文學性修辭。
