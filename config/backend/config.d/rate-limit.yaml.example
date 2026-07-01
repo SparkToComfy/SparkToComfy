@@ -1,0 +1,7 @@
+# Request-count quota mode.
+# mode: global | provider | model | mixed | disabled
+rate_limit:
+  mode: global
+  global:
+    max_requests: 20
+    window_seconds: 3600

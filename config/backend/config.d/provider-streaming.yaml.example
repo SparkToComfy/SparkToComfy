@@ -1,0 +1,2 @@
+provider_streaming:
+  enabled: true

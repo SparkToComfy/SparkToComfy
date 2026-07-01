@@ -1,0 +1,101 @@
+# Provider/model entries. API keys are read from env_key environment variables;
+# provider secrets and provider-specific payload fragments are never exposed by
+# public discovery routes.
+providers:
+  - name: openai
+    env_key: OPENAI_API_KEY
+    base_url: https://api.openai.com
+    protocol: openai
+    models:
+      - id: gpt-4o
+        name: GPT-4o
+        temperature: 1.0
+        timeout: 360
+        structured_output:
+          mode: openai_chat_json_schema
+
+      - id: gpt-5.4-mini
+        name: GPT-5.4 Mini
+        labels: ["SFW", "FAST"]
+        temperature: 1.0
+        timeout: 360
+        structured_output:
+          mode: openai_chat_json_schema
+        thinking:
+          supported: true
+          options:
+            - id: none
+              label: None
+              provider_payload: {}
+            - id: low
+              label: Low
+              openai:
+                reasoning_effort: low
+            - id: medium
+              label: Medium
+              openai:
+                reasoning_effort: medium
+        token_rate_limit:
+          max_tokens: 1000000
+          window_seconds: 86400
+          missing_usage_tokens: 30000
+          estimate:
+            enabled: true
+            chars_per_token: 4.0
+            output_tokens_per_generation: 1200
+            safety_margin_tokens: 256
+
+  - name: gemini
+    env_key: GEMINI_API_KEY
+    base_url: https://generativelanguage.googleapis.com
+    protocol: gemini
+    models:
+      - id: gemini-2.0-flash-exp
+        name: Gemini 2.0 Flash
+        temperature: 1.0
+        timeout: 360
+        structured_output:
+          mode: gemini_response_schema
+
+  - name: anthropic
+    env_key: ANTHROPIC_API_KEY
+    base_url: https://api.anthropic.com
+    protocol: anthropic
+    models:
+      - id: claude-opus-4
+        name: Claude Opus 4
+        labels: ["SLOW"]
+        temperature: 1.0
+        timeout: 360
+        structured_output:
+          mode: anthropic_tool_schema
+
+  - name: nvidia
+    env_key: NVIDIA_API_KEY
+    base_url: https://integrate.api.nvidia.com
+    protocol: openai_compatible
+    models:
+      - id: nvidia/llama-3.1-nemotron-70b-instruct
+        name: Llama 3.1 Nemotron 70B
+        temperature: 1.0
+        timeout: 360
+        structured_output:
+          mode: prompt_only
+
+  - name: deepseek
+    env_key: DEEPSEEK_API_KEY
+    base_url: https://api.deepseek.com
+    protocol: openai_compatible
+    models:
+      - id: deepseek-v4-pro
+        name: DeepSeek V4 Pro (Official)
+        temperature: 1.5
+        timeout: 360
+        structured_output:
+          mode: prompt_only
+      - id: deepseek-chat
+        name: DeepSeek Chat
+        temperature: 1.0
+        timeout: 360
+        structured_output:
+          mode: openai_chat_json_object

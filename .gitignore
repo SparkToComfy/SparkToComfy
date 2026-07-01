@@ -6,8 +6,11 @@
 
 # Runtime config with secrets/private prompts
 config/backend/config.yaml
+config/backend/config.d/*.yaml
 config/backend/prompts/*.md
 config/backend/prompts/*.yaml
+config/backend/prompts/*.json
+config/backend/prompts/fewshot/*.json
 config/backend/prompts/modules/*.md
 config/bot/*.yaml
 
@@ -17,8 +20,11 @@ data/*
 
 # Keep examples
 !config/backend/config.yaml.example
+!config/backend/config.d/*.yaml.example
 !config/backend/prompts/*.md.example
 !config/backend/prompts/*.yaml.example
+!config/backend/prompts/*.json.example
+!config/backend/prompts/fewshot/*.json.example
 !config/backend/prompts/modules/*.md.example
 !config/bot/*.yaml.example
 
