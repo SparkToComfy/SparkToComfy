@@ -15,12 +15,15 @@ on:
         description: "SparkToComfy-frontend branch, tag, or commit"
         required: true
         default: "main"
+      mark_latest:
+        description: "Also move :latest to this build (use for real releases)"
+        type: boolean
+        default: true
   push:
     branches:
       - main
     paths:
       - "Dockerfile.app"
-      - ".github/workflows/build-app-image.yml"
 
 permissions:
   contents: read
@@ -46,7 +49,9 @@ jobs:
           backend_ref="${{ github.event.inputs.backend_ref }}"
           frontend_ref="${{ github.event.inputs.frontend_ref }}"
 
-          if [ -z "$app_version" ]; then app_version="latest"; fi
+          # Empty app_version = the push trigger (no inputs); main builds publish
+          # :edge so they never overwrite the release :latest.
+          if [ -z "$app_version" ]; then app_version="edge"; fi
           if [ -z "$backend_ref" ]; then backend_ref="main"; fi
           if [ -z "$frontend_ref" ]; then frontend_ref="main"; fi
 
@@ -72,14 +77,32 @@ jobs:
             exit 1
           fi
 
+      - name: Compute image tags
+        id: tags
+        shell: bash
+        run: |
+          tags="${IMAGE_NAME}:${APP_VERSION}"
+          # MARK_LATEST is "true"/"false" on workflow_dispatch, empty on push.
+          if [ "$MARK_LATEST" = "true" ] && [ "$APP_VERSION" != "latest" ]; then
+            tags="${tags}"$'\n'"${IMAGE_NAME}:latest"
+          fi
+          {
+            echo "tags<<EOF"
+            printf '%s\n' "$tags"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+        env:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          APP_VERSION: ${{ steps.refs.outputs.app_version }}
+          MARK_LATEST: ${{ github.event.inputs.mark_latest }}
+
       - name: Build and push app image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile.app
           push: true
-          tags: |
-            ${{ env.IMAGE_NAME }}:${{ steps.refs.outputs.app_version }}
+          tags: ${{ steps.tags.outputs.tags }}
           build-args: |
             APP_VERSION=${{ steps.refs.outputs.app_version }}
             BACKEND_REPO=${{ env.BACKEND_REPO }}
