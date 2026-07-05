@@ -4,29 +4,19 @@
 !.env.example
 .local-backup/
 
-# Runtime config with secrets/private prompts
-config/backend/config.yaml
-config/backend/config.d/*.yaml
-config/backend/prompts/*.md
-config/backend/prompts/*.yaml
-config/backend/prompts/*.json
-config/backend/prompts/fewshot/*.json
-config/backend/prompts/modules/*.md
-config/bot/*.yaml
+# Runtime config with secrets (operators copy these from the .example files)
+config/config.yaml
+config/providers.yaml
+config/image-options.yaml
+
+# Keep config examples
+!config/config.yaml.example
+!config/providers.yaml.example
+!config/image-options.yaml.example
 
 # Runtime data
 data/*
 !data/.gitkeep
-
-# Keep examples
-!config/backend/config.yaml.example
-!config/backend/config.d/*.yaml.example
-!config/backend/prompts/*.md.example
-!config/backend/prompts/*.yaml.example
-!config/backend/prompts/*.json.example
-!config/backend/prompts/fewshot/*.json.example
-!config/backend/prompts/modules/*.md.example
-!config/bot/*.yaml.example
 
 # Logs / OS / IDE
 *.log

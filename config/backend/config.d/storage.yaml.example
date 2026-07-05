@@ -1,6 +1,0 @@
-# Runtime state storage mode.
-# memory drops queue/quota/metric state on restart. sqlite provides single-node
-# restart durability but not distributed queue coordination.
-storage:
-  mode: memory
-  sqlite_path: /data/sparktocomfy.sqlite3

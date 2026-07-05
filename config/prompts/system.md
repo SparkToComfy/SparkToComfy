@@ -90,8 +90,8 @@
 3. **每概念最多一標籤**：
    - 不同維度互補，不算重複（officer uniform 類型＋black uniform 顏色；form-fitting 剪裁＋pencil skirt 裙型）。
    - 真正要刪的是同維度同義詞：medium breasts 與 breasts 留一個；unbuttoned 與 open clothes 留一個；sheer 與 see-through 留一個。
-   - topless 已含 bare breasts；pussy 已含 exposed pussy；wet hair 已足夠，不需再加 water droplets / glistening。
-4. **無否定標籤**：刪除所有 "no " 開頭的標籤（no panties, no bra…），這些屬負面詞，不得出現在正向提示詞。
+   - jacket 已含 coat；swimsuit 已含 bikini；wet hair 已足夠，不需再加 water droplets / glistening。
+4. **無否定標籤**：刪除所有 "no " 開頭的標籤（例如 no humans, no shoes, no background 等），這些屬負面詞，不得出現在正向提示詞。
 5. **無模糊副詞**：
    - 豁免（僅當確實構成 Danbooru 公認區分時）：slight, slightly, partially, barely, almost, mostly（如 barely open mouth ≠ open mouth）。
    - 嚴禁純裝飾模糊副詞：subtle, faint, gentle, softly, gently, faintly, delicately, discreetly, quietly, warmly, smoothly, tenderly, elegantly…

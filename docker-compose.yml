@@ -9,7 +9,7 @@ services:
       CONFIG_DIR: /config
       DATA_DIR: /data
     volumes:
-      - ./config/backend:/config:ro
+      - ./config:/config:ro
       - ./data:/data
     ports:
       - "${APP_PORT:-8000}:8000"

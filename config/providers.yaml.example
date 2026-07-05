@@ -1,11 +1,31 @@
-# Provider/model entries. API keys are read from env_key environment variables;
-# provider secrets and provider-specific payload fragments are never exposed by
-# public discovery routes.
+# config/providers.yaml.example - rate limits and LLM providers
+#
+# Copy this file to config/providers.yaml and edit your values. The backend
+# never falls back to .example files; see docs/guidelines/ for setup guides.
+#
+# Sections in this file: rate_limit, providers.
+
+# Request-count quota mode.
+# mode: global | provider | model | mixed | disabled
+# global mode requires a rate_limit.global block:
+#   global:
+#     max_requests: 20
+#     window_seconds: 3600
+rate_limit:
+  mode: mixed
+
+# Provider/model entries. API keys are read from env_key environment
+# variables; provider secrets and provider-specific payload fragments are
+# never exposed by public discovery routes.
 providers:
   - name: openai
     env_key: OPENAI_API_KEY
     base_url: https://api.openai.com
     protocol: openai
+    # streaming: true    # per-provider upstream streaming switch, default true
+    rate_limit:
+      max_requests: 150
+      window_seconds: 86400
     models:
       - id: gpt-4o
         name: GPT-4o
@@ -16,7 +36,9 @@ providers:
 
       - id: gpt-5.4-mini
         name: GPT-5.4 Mini
-        labels: ["SFW", "FAST"]
+        labels:
+          - SFW
+          - FAST
         temperature: 1.0
         timeout: 360
         structured_output:
@@ -35,6 +57,9 @@ providers:
               label: Medium
               openai:
                 reasoning_effort: medium
+        prompt_cache:
+          enabled: true
+          key_strategy: system_prompt_hash
         token_rate_limit:
           max_tokens: 1000000
           window_seconds: 86400
@@ -46,7 +71,7 @@ providers:
             safety_margin_tokens: 256
 
   - name: gemini
-    env_key: GEMINI_API_KEY
+    env_key: GCP_API_KEY
     base_url: https://generativelanguage.googleapis.com
     protocol: gemini
     models:
@@ -64,11 +89,15 @@ providers:
     models:
       - id: claude-opus-4
         name: Claude Opus 4
-        labels: ["SLOW"]
+        labels:
+          - SLOW
         temperature: 1.0
         timeout: 360
         structured_output:
           mode: anthropic_tool_schema
+        thinking:
+          supported: true
+          effort: low
 
   - name: nvidia
     env_key: NVIDIA_API_KEY

@@ -1,0 +1,121 @@
+# config/image-options.yaml.example - public image generation options
+#
+# Copy this file to config/image-options.yaml and edit your values. The
+# backend never falls back to .example files; see docs/guidelines/ for setup
+# guides.
+#
+# Everything the frontend can pick for image generation lives here: size and
+# sampling controls, base models, quality/negative prompt presets, and LoRAs.
+# Future LoRA or prompt preset additions belong in this file.
+#
+# Section in this file: image_options.
+
+image_options:
+  size:
+    default_width: 1024
+    min_width: 512
+    max_width: 2560
+    width_step: 8
+    default_height: 1536
+    min_height: 512
+    max_height: 2560
+    height_step: 8
+
+  sampling:
+    default_steps: 30
+    min_steps: 0
+    max_steps: 50
+    default_cfg: 4.6
+    min_cfg: 0.0
+    max_cfg: 7.0
+    cfg_step: 0.1
+    default_sampler_name: dpmpp_3m_sde
+    default_scheduler: sgm_uniform
+    samplers:
+      - dpmpp_2m_sde
+      - dpmpp_3m_sde
+      - exp_heun_2_x0_sde
+    schedulers:
+      - simple
+      - normal
+      - beta
+      - sgm_uniform
+      - karras
+
+  # Base model options require workflow.nodes.base_model in config.yaml.
+  # value is the ComfyUI UNET filename written into the workflow.
+  base_models:
+    - id: anima_base_v10
+      label: Anima Base V10
+      value: anima_baseV10.safetensors
+
+  quality:
+    default: masterpiece
+    options:
+      - id: masterpiece
+        label: Masterpiece
+        value: "masterpiece, best quality, very aesthetic, ultra-detailed, score_9, score_8, score_7,"
+      - id: balanced
+        label: Balanced
+        value: "best quality, high detail, clean linework"
+      - id: soft_detail
+        label: Soft Detail
+        value: "best quality, soft lighting, detailed textures, refined composition"
+
+  negative:
+    default: standard
+    options:
+      - id: standard
+        label: Standard
+        value: "worst quality, low quality, score_1, score_2, score_3"
+      - id: strict_quality
+        label: Strict Quality
+        value: "worst quality, low quality, score_1, score_2, score_3, bad anatomy, bad hands, blurry"
+      - id: minimal
+        label: Minimal
+        value: "worst quality, low quality"
+
+  # Public LoRA options require workflow.nodes.lora_loader in config.yaml;
+  # trigger_words additionally require workflow.nodes.lora_trigger.
+  # name is the backend-only ComfyUI LoRA runtime name.
+  loras:
+    - id: ps_gpt2_style_v1
+      label: Ps GPT2 style v1
+      name: Ps_gpt2-style_v1_epoch25
+      default_weight: 1.0
+      min_weight: 0.0
+      max_weight: 2.0
+      step: 0.05
+      clipStrength: 1.0
+      trigger_words:
+        - "@gpt2"
+    - id: ps_gpt2_style_v2
+      label: Ps GPT2 style v2
+      name: Ps_gpt2-style_v2-petite_epoch22
+      default_weight: 1.0
+      min_weight: 0.0
+      max_weight: 2.0
+      step: 0.05
+      clipStrength: 1.0
+      trigger_words:
+        - "@gpt2"
+    - id: ps_gpt2_style_v2.1
+      label: Ps GPT2 style v2.1
+      name: Ps_gpt2-style_v2.1_epoch21
+      default_weight: 1.0
+      min_weight: 0.0
+      max_weight: 2.0
+      step: 0.05
+      clipStrength: 1.0
+      trigger_words:
+        - "@gpt2"
+    - id: ps_gpt2_style_v3
+      label: Ps GPT2 style v3
+      name: Ps_gpt2-style_v3-fusion_epoch29
+      default_weight: 1.0
+      min_weight: 0.0
+      max_weight: 2.0
+      step: 0.05
+      clipStrength: 1.0
+      trigger_words:
+        - "@gpt2"

@@ -1,0 +1,54 @@
+# Prompt Assembly Layout for SparkToComfy
+#
+# This file defines the complete prompt assembly order and module registry.
+# The backend validates this layout at startup and uses it to assemble user
+# messages for text generation requests.
+
+# Assembly order (top-to-bottom = final user message order)
+# Five builtin entries (each appears exactly once):
+#   - detailed_input: detailed mode input field (label: 詳細描述)
+#   - identity: quick mode identity field (label: 主體身分)
+#   - costume: quick mode costume field (label: 服裝設計)
+#   - composition: quick mode composition field (label: 整體構圖)
+#   - count: generation count (label: 生成數量, renders in both modes)
+#
+# All other IDs reference modules below and are injected only when enabled.
+order:
+  - multi_character
+  - fashion_clothing
+  - cultural_costume
+  - character_creativity
+  - nsfw_techniques
+  - character_detailing
+  - detailed_input
+  - identity
+  - costume
+  - composition
+  - visual_emphasis_character_and_outfit
+  - visual_emphasis_background_environment
+  - image_narrative
+  - lighting_mood
+  - color_play
+  - scene_logic
+  - count
+  - per_prompt_self_check
+
+# Module registry (id: snippet_path)
+# Activation uses naming convention:
+#   - ID matches a PromptOptions boolean field → enabled when that option is true
+#   - ID is visual_emphasis_<value> → enabled when visual_emphasis equals <value>
+#   - ID not mappable → startup error (guards against typos)
+modules:
+  multi_character: modules/multi_character.md
+  fashion_clothing: modules/fashion_clothing.md
+  cultural_costume: modules/cultural_costume.md
+  character_creativity: modules/character_creativity.md
+  nsfw_techniques: modules/nsfw_techniques.md
+  character_detailing: modules/character_detailing.md
+  visual_emphasis_character_and_outfit: modules/visual_emphasis_character_and_outfit.md
+  visual_emphasis_background_environment: modules/visual_emphasis_background_environment.md
+  image_narrative: modules/image_narrative.md
+  lighting_mood: modules/lighting_mood.md
+  color_play: modules/color_play.md
+  scene_logic: modules/scene_logic.md
+  per_prompt_self_check: modules/per_prompt_self_check.md

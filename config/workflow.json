@@ -1,0 +1,419 @@
+{
+  "20736": {
+    "inputs": {
+      "mode": "Manual",
+      "latent_type": "latent_4x8",
+      "width": 1024,
+      "height": 1536,
+      "auto_detect": false,
+      "auto_detect_source": "backend",
+      "auto_detect_width": 0,
+      "auto_detect_height": 0,
+      "auto_fit_on_change": false,
+      "auto_resize_on_change": false,
+      "auto_snap_on_change": false,
+      "smart_fit": false,
+      "use_custom_calc": false,
+      "preserve_scaling_ratio": false,
+      "selected_category": "Standard",
+      "snap_value": 64,
+      "upscale_value": 1,
+      "target_resolution": 1080,
+      "target_megapixels": 2,
+      "auto_detect_presets_json": "{\"1:1 Square\":{\"width\":512,\"height\":512,\"isCustom\":false,\"isHidden\":false},\"1:2 Tall\":{\"width\":512,\"height\":1024,\"isCustom\":false,\"isHidden\":false},\"1:3 Ultra Tall\":{\"width\":512,\"height\":1536,\"isCustom\":false,\"isHidden\":false},\"2:3 Portrait\":{\"width\":512,\"height\":768,\"isCustom\":false,\"isHidden\":false},\"3:4 Portrait\":{\"width\":576,\"height\":768,\"isCustom\":false,\"isHidden\":false},\"4:5 Portrait\":{\"width\":512,\"height\":640,\"isCustom\":false,\"isHidden\":false},\"4:7 Phone\":{\"width\":512,\"height\":896,\"isCustom\":false,\"isHidden\":false},\"5:12 Banner\":{\"width\":512,\"height\":1228,\"isCustom\":false,\"isHidden\":false},\"7:9 Vertical\":{\"width\":512,\"height\":658,\"isCustom\":false,\"isHidden\":false},\"9:16 Mobile\":{\"width\":576,\"height\":1024,\"isCustom\":false,\"isHidden\":false},\"9:21 Ultra Mobile\":{\"width\":512,\"height\":1194,\"isCustom\":false,\"isHidden\":false},\"10:16 Monitor\":{\"width\":640,\"height\":1024,\"isCustom\":false,\"isHidden\":false},\"13:19 Tall Screen\":{\"width\":512,\"height\":748,\"isCustom\":false,\"isHidden\":false},\"3:2 Landscape\":{\"width\":768,\"height\":512,\"isCustom\":false,\"isHidden\":false},\"4:3 Classic\":{\"width\":512,\"height\":384,\"isCustom\":false,\"isHidden\":false},\"16:9 Widescreen\":{\"width\":768,\"height\":432,\"isCustom\":false,\"isHidden\":false},\"21:9 Ultrawide\":{\"width\":1024,\"height\":439,\"isCustom\":false,\"isHidden\":false}}",
+      "rescale_mode": "resolution",
+      "rescale_value": 1.1481983169296148,
+      "batch_size": 1
+    },
+    "class_type": "ResolutionMaster",
+    "_meta": {
+      "title": "Resolution Master"
+    }
+  },
+  "20737": {
+    "inputs": {
+      "__lm_autocomplete_meta_text": {
+        "version": 1,
+        "textWidgetName": "text"
+      },
+      "text": "<lora:Ps_gpt2-style_v1_epoch25:1.00> <lora:Ps_gpt2-style_v2-petite_epoch22:1.00> <lora:Ps_gpt2-style_v3-fusion_epoch29:1.00> <lora:Ps_gpt2-style_v2.1_epoch21:1.00> <lora:lc-style_v1_lokr_epoch22:1.00>",
+      "loras": {
+        "__value__": [
+          {
+            "name": "Ps_gpt2-style_v1_epoch25",
+            "strength": "1.00",
+            "active": true,
+            "expanded": false,
+            "clipStrength": "1.00",
+            "locked": false
+          },
+          {
+            "name": "Ps_gpt2-style_v2-petite_epoch22",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "locked": false
+          },
+          {
+            "name": "Ps_gpt2-style_v3-fusion_epoch29",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "locked": false
+          },
+          {
+            "name": "Ps_gpt2-style_v2.1_epoch21",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "locked": false
+          },
+          {
+            "name": "lc-style_v1_lokr_epoch22",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "locked": false
+          }
+        ]
+      },
+      "model": [
+        "20735:6196",
+        0
+      ],
+      "clip": [
+        "20735:6198",
+        0
+      ]
+    },
+    "class_type": "Lora Loader (LoraManager)",
+    "_meta": {
+      "title": "Lora加载器"
+    }
+  },
+  "20738": {
+    "inputs": {
+      "group_mode": true,
+      "default_active": true,
+      "allow_strength_adjustment": false,
+      "toggle_trigger_words": {
+        "__value__": [
+          {
+            "text": "@gpt2",
+            "active": true,
+            "highlighted": false,
+            "strength": null,
+            "items": [
+              {
+                "text": "@gpt2",
+                "active": true,
+                "highlighted": false,
+                "strength": null
+              }
+            ]
+          }
+        ]
+      },
+      "orinalMessage": "@gpt2",
+      "trigger_words": [
+        "20737",
+        3
+      ]
+    },
+    "class_type": "TriggerWord Toggle (LoraManager)",
+    "_meta": {
+      "title": "TriggerWord Toggle (LoraManager)"
+    }
+  },
+  "20739": {
+    "inputs": {
+      "positive": "masterpiece, best quality, very aesthetic, ultra-detailed, score_9, score_8, score_7,"
+    },
+    "class_type": "easy positive",
+    "_meta": {
+      "title": "质量词"
+    }
+  },
+  "20740": {
+    "inputs": {
+      "positive": "1girl"
+    },
+    "class_type": "easy positive",
+    "_meta": {
+      "title": "正面提示詞"
+    }
+  },
+  "20741": {
+    "inputs": {
+      "negative": "worst quality, low quality, score_1, score_2, score_3"
+    },
+    "class_type": "easy negative",
+    "_meta": {
+      "title": "负面提示词"
+    }
+  },
+  "20742": {
+    "inputs": {
+      "seed": 389366860893346,
+      "steps": 30,
+      "cfg": 4.5,
+      "sampler_name": "exp_heun_2_x0_sde",
+      "scheduler": "beta",
+      "denoise": 1,
+      "model": [
+        "20737",
+        0
+      ],
+      "positive": [
+        "20750",
+        0
+      ],
+      "negative": [
+        "20751",
+        0
+      ],
+      "latent_image": [
+        "20736",
+        4
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "20743": {
+    "inputs": {
+      "samples": [
+        "20742",
+        0
+      ],
+      "vae": [
+        "20735:6197",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "20744": {
+    "inputs": {
+      "resize_type": "scale by multiplier",
+      "resize_type.scale": 2,
+      "quality": "ULTRA",
+      "images": [
+        "20743",
+        0
+      ]
+    },
+    "class_type": "RTXVideoSuperResolution",
+    "_meta": {
+      "title": "RTX Video Super Resolution"
+    }
+  },
+  "20745": {
+    "inputs": {
+      "enable": true,
+      "filename_prefix": "API/%date:yyyy-MM-dd-hh-mm-ss%_%model%-%seed%",
+      "file_format": "PNG",
+      "quality": 100,
+      "embed_workflow": false,
+      "save_clean_copy": false,
+      "enable_preview": true,
+      "images": [
+        "20753",
+        0
+      ]
+    },
+    "class_type": "SaveImagePlus",
+    "_meta": {
+      "title": "保存图像增强版 (Save Image Plus)"
+    }
+  },
+  "20746": {
+    "inputs": {
+      "separator": ", ",
+      "prompt1": [
+        "20739",
+        0
+      ],
+      "prompt2": [
+        "20738",
+        0
+      ]
+    },
+    "class_type": "easy promptConcat",
+    "_meta": {
+      "title": "质量词-触发词"
+    }
+  },
+  "20747": {
+    "inputs": {
+      "separator": ", ",
+      "prompt1": [
+        "20746",
+        0
+      ],
+      "prompt2": [
+        "20740",
+        0
+      ]
+    },
+    "class_type": "easy promptConcat",
+    "_meta": {
+      "title": "质量词-触发词-主提示词"
+    }
+  },
+  "20748": {
+    "inputs": {
+      "string": [
+        "20747",
+        0
+      ],
+      "regex_pattern": "1011",
+      "replace": "loli",
+      "case_insensitive": true,
+      "multiline": false,
+      "dotall": false,
+      "count": 0
+    },
+    "class_type": "RegexReplace",
+    "_meta": {
+      "title": "正则表达式替换"
+    }
+  },
+  "20749": {
+    "inputs": {
+      "清理逗号 (cleanup_commas)": true,
+      "清理空白 (cleanup_whitespace)": true,
+      "移除LoRA标签 (remove_lora_tags)": true,
+      "清理换行 (cleanup_newlines)": "空格 (space)",
+      "修复括号 (fix_brackets)": "否 (false)",
+      "提示词格式化 (prompt_formatting)": false,
+      "下划线转空格 (underscore_to_space)": false,
+      "权重语法补全 (complete_weight_syntax)": false,
+      "智能括号转义 (smart_bracket_escaping)": false,
+      "标准化逗号 (standardize_commas)": true,
+      "修复分区语法 (fix_region_syntax)": true,
+      "string": [
+        "20748",
+        0
+      ]
+    },
+    "class_type": "PromptCleaningMaid",
+    "_meta": {
+      "title": "提示词清洁女仆 (Prompt Cleaning Maid)"
+    }
+  },
+  "20750": {
+    "inputs": {
+      "text": [
+        "20749",
+        0
+      ],
+      "clip": [
+        "20737",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "正面提示词编码"
+    }
+  },
+  "20751": {
+    "inputs": {
+      "text": [
+        "20741",
+        0
+      ],
+      "clip": [
+        "20737",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "负面提示词编码"
+    }
+  },
+  "20752": {
+    "inputs": {
+      "method": "hm-mvgd-hm",
+      "strength": 1.0000000000000002,
+      "multithread": true,
+      "image_ref": [
+        "20743",
+        0
+      ],
+      "image_target": [
+        "20744",
+        0
+      ]
+    },
+    "class_type": "ColorMatch",
+    "_meta": {
+      "title": "Color Match"
+    }
+  },
+  "20753": {
+    "inputs": {
+      "anything": [
+        "20752",
+        0
+      ]
+    },
+    "class_type": "easy clearCacheAll",
+    "_meta": {
+      "title": "清除全部缓存"
+    }
+  },
+  "20754": {
+    "inputs": {
+      "images": [
+        "20753",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "20735:6197": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "20735:6198": {
+    "inputs": {
+      "clip_name": "qwen_3_06b_base.safetensors",
+      "type": "stable_diffusion",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "加载CLIP"
+    }
+  },
+  "20735:6196": {
+    "inputs": {
+      "unet_name": "anima_baseV10.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  }
+}

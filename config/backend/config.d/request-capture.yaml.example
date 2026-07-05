@@ -1,6 +1,0 @@
-# Diagnostic request/response capture is disabled by default because prompts and
-# model outputs may contain sensitive data.
-request_capture:
-  enabled: false
-  directory: /data/request-captures
-  retention_days: 7
