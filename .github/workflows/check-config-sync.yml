@@ -1,0 +1,53 @@
+name: Check config sync
+
+# Guarantees this repo's config/ and docs/guidelines/ stay a faithful mirror of
+# SparkToComfy-backend. Regenerates the mirror from the backend and fails if the
+# committed files differ. Runs on relevant pushes/PRs and weekly (to catch
+# upstream backend changes even when this repo is untouched).
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/**"
+      - "docs/guidelines/**"
+      - "scripts/sync-from-backend.sh"
+      - ".github/workflows/check-config-sync.yml"
+  pull_request:
+    paths:
+      - "config/**"
+      - "docs/guidelines/**"
+      - "scripts/sync-from-backend.sh"
+      - ".github/workflows/check-config-sync.yml"
+  schedule:
+    - cron: "0 6 * * 1"  # Mondays 06:00 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout SparkToComfy
+        uses: actions/checkout@v4
+
+      - name: Validate source token
+        shell: bash
+        run: |
+          if [ -z "${{ secrets.SPARKTOCOMFY_SOURCE_TOKEN }}" ]; then
+            echo "::error title=Missing source token::Add SPARKTOCOMFY_SOURCE_TOKEN (read access to SparkToComfy-backend) so this check can compare against the backend, or make the backend repo public."
+            exit 1
+          fi
+
+      - name: Checkout SparkToComfy-backend
+        uses: actions/checkout@v4
+        with:
+          repository: SparkToComfy/SparkToComfy-backend
+          ref: main
+          token: ${{ secrets.SPARKTOCOMFY_SOURCE_TOKEN }}
+          path: _backend
+
+      - name: Verify config/ and docs/guidelines/ are in sync
+        shell: bash
+        run: scripts/sync-from-backend.sh --check "${GITHUB_WORKSPACE}/_backend"
