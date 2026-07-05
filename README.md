@@ -1,6 +1,7 @@
-# SparkToComfy Compose
+# SparkToComfy
 
-This repo owns Docker Compose app wiring and runtime config layout.
+This is the main SparkToComfy repo: deployment wiring, runtime config layout, and
+user-facing documentation. It is the entry point for running SparkToComfy on a VM.
 
 VMs should not build backend/frontend source. The normal production flow is:
 
@@ -169,7 +170,11 @@ images.
 
 ## Ownership
 
-- `SparkToComfy-backend` owns API code, Python dependencies, backend tests, and optional `STATIC_DIR` serving.
+- `SparkToComfy` (this repo, formerly `SparkToComfy-compose`) owns compose files, the
+  app image build workflow, the mounted runtime config layout, deployment/config docs,
+  and the product-level overview (use cases, user stories).
+- `SparkToComfy-backend` owns API code, Python dependencies, backend tests, optional
+  `STATIC_DIR` serving, and all implementation specs and diagrams (`docs/SPEC/`,
+  interaction and flow diagrams).
 - `SparkToComfy-frontend` owns Vue/Vite code, frontend checks, and static build output.
-- `SparkToComfy-compose` owns compose files, app image build workflow, and mounted runtime config layout.
 - `SparkToComfy-bot` is intentionally not created yet.
