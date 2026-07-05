@@ -6,7 +6,10 @@ to this number — each release chooses its source refs at build time via the
 `build-app-image` workflow inputs (`backend_ref`, `frontend_ref`). So one app
 release can be built from any backend/frontend refs.
 
-Versions use the `vX.Y.Z` form. Old unversioned (`X.Y.Z`, no `v`) images may be
+Versions use the `vX.Y.Z` form. The newest release also carries `:latest`
+automatically (the build workflow's `mark_latest` input, default `true`), so
+`:latest` always points to the newest release. Main-branch pushes publish `:edge`
+instead and never move `:latest`. Old unversioned (`X.Y.Z`, no `v`) images may be
 deleted from GHCR.
 
 | App image / repo tag | backend_ref | frontend_ref | Notes |
@@ -22,7 +25,8 @@ deleted from GHCR.
    gh workflow run build-app-image.yml -R SparkToComfy/SparkToComfy \
      -f app_version=vX.Y.Z \
      -f backend_ref=<backend tag> \
-     -f frontend_ref=<frontend tag>
+     -f frontend_ref=<frontend tag> \
+     -f mark_latest=true            # also moves :latest onto this release (default)
    ```
 
 3. On the deployment host, adopt it:
