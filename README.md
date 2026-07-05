@@ -177,4 +177,3 @@ images.
   `STATIC_DIR` serving, and all implementation specs and diagrams (`docs/SPEC/`,
   interaction and flow diagrams).
 - `SparkToComfy-frontend` owns Vue/Vite code, frontend checks, and static build output.
-- `SparkToComfy-bot` is intentionally not created yet.
