@@ -50,4 +50,4 @@ jobs:
 
       - name: Verify config/ and docs/guidelines/ are in sync
         shell: bash
-        run: scripts/sync-from-backend.sh --check "${GITHUB_WORKSPACE}/_backend"
+        run: bash scripts/sync-from-backend.sh --check "${GITHUB_WORKSPACE}/_backend"
